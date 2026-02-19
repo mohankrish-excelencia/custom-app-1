@@ -1,1 +1,20 @@
+name: Trigger Infra Deployment
+
+on:
+  push:
+    branches: [ "main" ]  # Or you can make this a workflow_dispatch if you want manual trigger.
+
+jobs:
+  trigger-infra:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch to Central Repo
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: Jobinjohn2002/Infra-Repo
+          event-type: deploy-infra
+          client_name: "Excelencia"       # Replace this with a dynamic input or set it as a variable.
+          environment: "dev"         # Replace this as needed
+
 
